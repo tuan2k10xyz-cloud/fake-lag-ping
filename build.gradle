@@ -1,0 +1,41 @@
+buildscript {
+    // 🛠️ SỬA LỖI: buildscript phải viết thường toàn bộ
+    ext.build_gradle_version = '3.6.1'
+    
+    repositories {
+        // 🚀 ƯU TIÊN MIRROR LÊN ĐẦU: Để tránh bị kẹt 50% khi tải quốc tế
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+        maven { url "https://jitpack.io" }
+        
+        // Sau đó mới đến các kho chính thức
+        google()
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:$build_gradle_version"
+        classpath 'com.google.gms:google-services:4.3.3'
+    }
+}
+
+allprojects {
+    repositories {
+        // 🚀 Đưa Mirror lên đầu ở đây nữa để tải Shizuku và Firebase nhanh hơn
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://jitpack.io' }
+        
+        google()
+        mavenCentral()
+        jcenter()
+        mavenLocal()
+    }
+}
+
+// Task dọn dẹp để bạn fix lỗi cache
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
