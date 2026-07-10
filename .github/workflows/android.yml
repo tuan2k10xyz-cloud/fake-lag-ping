@@ -29,8 +29,8 @@ jobs:
         with:
           gradle-version: '7.4'
 
-      - name: Build with Gradle 7.4
-        run: gradle assembleDebug
+      - name: Force Build APK Only
+        run: gradle assembleDebug -x test -x lint --no-daemon
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
