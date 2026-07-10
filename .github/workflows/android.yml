@@ -19,6 +19,11 @@ jobs:
           unzip app/src.zip -d app/
           rm app/src.zip
 
+      - name: Fix Deprecated JCenter
+        run: |
+          sed -i 's/jcenter()/mavenCentral()/g' build.gradle
+          sed -i 's/jcenter()/mavenCentral()/g' app/build.gradle
+
       - name: Build with Global Gradle
         run: gradle assembleDebug
 
