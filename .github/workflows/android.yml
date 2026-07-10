@@ -19,8 +19,10 @@ jobs:
           unzip app/src.zip -d app/
           rm app/src.zip
 
-      - name: Regenerate Gradle Wrapper
-        run: gradle wrapper
+      - name: Fix Missing Gradle Wrapper
+        run: |
+          mkdir -p gradle/wrapper
+          curl -L https://raw.githubusercontent.com/gradle/gradle/v7.4/gradle/wrapper/gradle-wrapper.jar -o gradle/wrapper/gradle-wrapper.jar
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
