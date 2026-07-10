@@ -1,0 +1,44 @@
+/**
+ * @基于 https://github.com/shwenzhang/AndResGuard
+ * @Date 2019/10/24 20:48
+
+ * @param keepRoot - Whether to obfuscate only resource names
+ * @param fixedResName - global resource name
+ * @param mappingFile - Mapping configuration file, off by default, please remove $ to enable
+ * @param whiteList - Resource name whitelist - R.xxx.xxx，- Wildcards * and ? are supported
+ * @param compressFilePattern Optimize specified file types when compressing
+ */
+
+{
+// It will keep the origin path of your resources when it's true
+  "keepRoot": false,
+// It will merge the duplicated resources, but don't rely on this feature too much.
+// it's always better to remove duplicated resource from repo
+  "mergeDuplicatedRes": true,
+// If set, name column in arsc those need to proguard will be kept to this value
+//"fixedResName": "_",
+  "fixedResName": "arg",
+  
+  "mappingFile": "$resource_mapping.txt",
+  "whiteList": [
+        // your icon
+        "R.drawable.icon",
+        // for fabric
+        "R.string.com.crashlytics.*",
+        // for google-services
+        "R.string.google_app_id",
+        "R.string.gcm_defaultSenderId",
+        "R.string.default_web_client_id",
+        "R.string.ga_trackingId",
+        "R.string.firebase_database_url",
+        "R.string.google_api_key",
+        "R.string.google_crash_reporting_api_key",
+        "R.string.project_id",
+    ],
+  "compressFilePattern": [
+    "*.png",
+    "*.jpg",
+    "*.jpeg",
+    "*.gif"
+  ]
+}

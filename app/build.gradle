@@ -1,0 +1,52 @@
+apply plugin: 'com.android.application'
+// Kích hoạt Google Services cho Firebase
+apply plugin: 'com.google.gms.google-services'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        applicationId "com.mycompany.application"
+        // 🛠️ BẮT BUỘC: Nâng lên 21 để chạy Shizuku (hiện tại bạn đang để 24 là rất tốt)
+        minSdkVersion 19
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        externalNativeBuild {
+            cmake {
+                cppFlags "-std=c++11 -O3"
+            }
+        }
+
+        ndk {
+            abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    externalNativeBuild {
+        cmake {
+            path "src/main/cpp/CMakeLists.txt"
+        }
+    }
+}
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+    
+    // Cập nhật Firebase lên bản 17.0.0 (Dễ tải hơn và ổn định hơn)
+    implementation 'com.google.firebase:firebase-core:17.0.0'
+    implementation 'com.google.firebase:firebase-analytics:17.0.0'
+    //implementation 'dev.rikka.shizuku:api:12.2.0'
+    //implementation 'dev.rikka.shizuku:provider:12.2.0'
+    // 🛠️ ĐÃ THÊM: Thư viện Firebase Realtime Database để sửa lỗi Crash App
+   implementation 'com.google.firebase:firebase-database:19.2.1'
+}
+
